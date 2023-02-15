@@ -13,16 +13,15 @@ if not os.path.exists(config):
     with open(config,"w", encoding='utf-8') as f:
         json.dump(json.loads('{"VEID": "", "API_KEY": ""}'), f, indent=4, ensure_ascii=False)
 
-conf = str()
-with open(config,"r") as f:
-    conf = json.load(f)
-VEID = conf["VEID"]
-API_KEY = conf["API_KEY"]
-
 @OnCmd("bwh", help="获取搬瓦工 vps 信息", doc=f'请在搬瓦工后台获取 `VEID` 和 `API_KEY`，在文件 `{config}` 中填入~')
 async def handler(client, msg, chat_id, args, reply):
     await msg.edit("获取中...")
     content = str()
+    conf = str()
+    with open(config,"r") as f:
+        conf = json.load(f)
+    VEID = conf["VEID"]
+    API_KEY = conf["API_KEY"]
     if bool(API_KEY and VEID):
         async with aiohttp.ClientSession() as session:
             async with session.get(f'https://api.64clouds.com/v1/getLiveServiceInfo?veid={VEID}&api_key={API_KEY}') as resp:
