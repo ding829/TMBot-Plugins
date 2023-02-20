@@ -6,8 +6,6 @@ import json
 import aiohttp
 import os
 
-PIP="aiohttp"
-
 config = f"{DATADIR}/bwh.json"
 if not os.path.exists(config):
     with open(config,"w", encoding='utf-8') as f:

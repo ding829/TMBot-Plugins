@@ -6,7 +6,6 @@ import platform
 import cpuinfo
 from uptime import uptime
 
-
 PIP = "psutil py-cpuinfo uptime"
 
 @OnCmd("sysinfo", help="获取系统信息")
