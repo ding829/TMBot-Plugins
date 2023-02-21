@@ -63,4 +63,4 @@ async def handler(client, update, chat_id, args, reply):
         i = random.choice(list(mjx.values()))
         url = i['url']
         caption = i['des']
-        await client.send_photo(chat_id, photo=url, caption=caption)
+        await client.send_message(chat_id, f'[{caption}]({url})', disable_web_page_preview=False)
