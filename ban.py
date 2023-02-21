@@ -11,6 +11,9 @@ async def handler(client, update, chat_id, args, reply):
             if status in {enums.ChatMemberStatus.OWNER, enums.ChatMemberStatus.ADMINISTRATOR}:
                 try:
                     await client.ban_chat_member(chat.id, msg.from_user.id)
+                except:
+                    pass
+                try:
                     await client.delete_user_history(chat.id, msg.from_user.id)
-                except Exception as e:
+                except:
                     pass
