@@ -63,4 +63,4 @@ async def handler(client, update, chat_id, args, reply):
         i = random.choice(list(mjx.values()))
         url = i['url']
         caption = i['des']
-        await client.send_message(chat_id, f'买家秀：\n[{caption}]({url})', disable_web_page_preview=False)
+        await client.send_message(chat_id, f'{caption_has_spoiler}买家秀：\n[{caption}]({url}){caption_has_spoiler}', disable_web_page_preview=False)
