@@ -1,4 +1,4 @@
-from client.utils import OnDraft
+from client.utils import OnCmd
 from client.config import prefix
 from pyrogram import enums
 
@@ -15,8 +15,8 @@ def is_number(s):
     except:
         return False 
 
-@OnDraft("dme", help="删除自己的消息",doc=doc)
-async def handler(client, update, chat_id, args, reply):
+@OnCmd("dme", help="删除自己的消息", doc=doc)
+async def handler(client, msg, chat_id, args, reply):
     async def dmlmsg(m):
         if not message.service:
             try:
