@@ -44,7 +44,7 @@ longHelp = f"""使用示例：
 
 PIP = "requests"
 
-@OnCmd("speedtest", help="speedtest 测速", doc=longHelp)
+@OnCmd("Speedtest", help="speedtest 测速", doc=longHelp)
 async def handler(client, msg, chat_id, args, reply):
     await msg.edit(f'运行中...')
     speedtest = f'{TMPDIR}/speedtest'
