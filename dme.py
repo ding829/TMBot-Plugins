@@ -17,6 +17,7 @@ def is_number(s):
 
 @OnCmd("dme", help="删除自己的消息", doc=doc)
 async def handler(client, msg, chat_id, args, reply):
+    await msg.delete()
     async def dmlmsg(m):
         if not message.service:
             try:
