@@ -8,7 +8,7 @@ import json
 import os
 import tarfile
 
-def convert_size(b, suffix="B", factor=1000):
+def convert_size(b, suffix="B", factor=1024):
     for unit in ["", "K", "M", "G", "T", "P"]:
         if b < factor:
             return f'{b:.2f}{unit}{suffix}'
@@ -94,8 +94,8 @@ async def handler(client, msg, chat_id, args, reply):
                 await msg.delete()
                 data = json.loads(output)
                 content = "**SPEEDTEST**\n\n"
-                content += f'下载：`{convert_size(data["download"]["bandwidth"], suffix="B/s")} - {convert_size(data["download"]["bytes"] * 8, suffix="B", factor=1024)}`\n'
-                content += f'上传：`{convert_size(data["upload"]["bandwidth"], suffix="B/s")} - {convert_size(data["upload"]["bytes"] * 8, suffix="B", factor=1024)}`\n'
+                content += f'下载：`{convert_size(data["download"]["bandwidth"], suffix="B/s")} - {convert_size(data["download"]["bytes"], suffix="B", factor=1000)}`\n'
+                content += f'上传：`{convert_size(data["upload"]["bandwidth"], suffix="B/s")} - {convert_size(data["upload"]["bytes"], suffix="B", factor=1000)}`\n'
                 content += f'Ping：`{data["ping"]["latency"]}ms - {data["ping"]["jitter"]}`\n'
                 content += f'客户端：`{data["isp"]}`\n'
                 content += f'服务器：`{data["server"]["name"]} - {data["server"]["location"]} {data["server"]["country"]}`\n'
