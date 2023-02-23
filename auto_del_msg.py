@@ -60,11 +60,14 @@ async def handler():
             await asyncio.sleep(3)
 
     async for dialog in app.get_dialogs():
-        if 'Discussion' in ChatType:
-            if dialog.chat.type == enums.ChatType.CHANNEL:
-                chat = await app.get_chat(dialog.chat.id)
-                if chat.linked_chat:
-                    await delmsg(chat.linked_chat.id)
+        try:
+            if 'Discussion' in ChatType:
+                if dialog.chat.type == enums.ChatType.CHANNEL:
+                    chat = await app.get_chat(dialog.chat.id)
+                    if chat.linked_chat:
+                        await delmsg(chat.linked_chat.id)
+        except:
+            pass
 
         if dialog.chat.type in ChatType:
             await delmsg(dialog.chat.id)
