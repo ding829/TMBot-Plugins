@@ -44,7 +44,7 @@ intervals：消息间隔时间，单位为天
 types：对话框类型，机器人为 BOT、群组为 GROUP、超级群组为 SUPERGROUP、频道为 CHANNEL、私聊为 PRIVATE、频道评论区为 Discussion
 """
 
-@OnScheduler(cron=cron, help="定时删除信息", doc=doc, version="2.0.97")
+@OnScheduler(cron=cron, help="定时删除信息", doc=doc)
 async def handler():
     async def delmsg(chat_id):
         async for message in app.search_messages(chat_id, from_user="me"):
