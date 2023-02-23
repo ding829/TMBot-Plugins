@@ -24,7 +24,7 @@ async def handler(client, msg, chat_id, args, reply):
 
         data = []
         for dc in range(1, 6):
-            result = ping(DCs[dc], unit = "ms")
+            result = round(ping(DCs[dc], unit = "ms"), 2)
             data.append(result)
 
         if not any(data):
@@ -39,7 +39,7 @@ async def handler(client, msg, chat_id, args, reply):
             f"🇸🇬 `DC5`: `{data[4]}ms`\n")    
 
     else:
-    	#https://github.com/TeamPGM/PagerMaid-Pyro/blob/aff6d953a1e00dc2241db9da32abc8f4c45453d3/pagermaid/modules/status.py#L126
+        #https://github.com/TeamPGM/PagerMaid-Pyro/blob/aff6d953a1e00dc2241db9da32abc8f4c45453d3/pagermaid/modules/status.py#L126
         start = datetime.now()
         await client.invoke(Ping(ping_id=0))
         end = datetime.now()
