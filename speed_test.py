@@ -33,6 +33,7 @@ doc = f"""使用示例：
 @Client.on_message(command('speedtest'), group=GlobalSN.reg(locals(), 'cmd', 'speedtest', '测速', doc))
 async def handler(client, message):
     await message.edit(f'运行中...')
+    chat_id = message.chat.id
     speedtest = f'{data_dir}/speedtest'
     
     args = message.text.strip().split()
