@@ -1,18 +1,19 @@
-from client.utils import OnMsg
-from pyrogram import filters
+from config import GlobalSN, app
+
+from pyrogram import Client, filters
 from pyrogram.raw.functions.messages import DeleteHistory
 
-@OnMsg(help="自动封禁无聊天记录的私聊", filters=filters.private)
-async def handler(client, msg):
-    message = await client.get_messages(msg.chat.id, msg.id)
-    if not bool(msg.from_user and (msg.from_user.is_self or msg.outgoing)):
-        if await client.search_messages_count(msg.chat.id) <= 1:
-            await client.read_chat_history(msg.chat.id)
-            await client.invoke(
-                DeleteHistory(
-                    max_id=0, 
-                    revoke=True, 
-                    peer=(await client.resolve_peer(msg.from_user.id))
-                )
+onmsg = filters.private & ~filters.me
+
+@Client.on_message(onmsg, group=GlobalSN.reg(locals(), 'msg', None, '封禁无记录私聊'))
+async def handler(client, message):
+    if await client.search_messages_count(message.chat.id) <= 1:
+        await client.read_chat_history(message.chat.id)
+        await client.invoke(
+            DeleteHistory(
+                max_id=0, 
+                revoke=True, 
+                peer=(await client.resolve_peer(message.from_user.id))
             )
-            await client.block_user(msg.from_user.id)
+        )
+        await client.block_user(message.from_user.id)

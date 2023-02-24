@@ -1,16 +1,17 @@
-from client.utils import OnCmd
+from pyrogram import Client
+from config import command, GlobalSN, Packages
 
 import time
-import psutil
 import platform
-import cpuinfo
-from uptime import uptime
 
-PIP = "psutil py-cpuinfo uptime"
+if Packages('psutil py-cpuinfo uptime'):
+    import psutil
+    import cpuinfo
+    from uptime import uptime
 
-@OnCmd("sysinfo", help="获取系统信息")
-async def handler(client, msg, chat_id, args, reply):
-    await msg.edit("获取中...")
+@Client.on_message(command('sysinfo'), group=GlobalSN.reg(locals(), 'cmd', 'sysinfo', '获取系统信息'))
+async def handler(client, message):
+    await message.edit("获取中...")
 
     def get_size(bytes, suffix="B"):
         factor = 1024
@@ -47,4 +48,4 @@ async def handler(client, msg, chat_id, args, reply):
     text += f"**负载**： `{psutil.cpu_percent()}%, {'%.2f' %load1}, {'%.2f' %load5}, {'%.2f' %load15}`\n"
     text += f"**运行时间**： `{', '.join(parts)}`\n"
 
-    await msg.edit(text)
+    await message.edit(text)

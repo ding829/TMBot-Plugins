@@ -1,15 +1,16 @@
-from client.utils import OnScheduler
+from config import GlobalSN, Packages
 
-import sys
 import time
 import math
 import threading
 import asyncio
-from psutil import virtual_memory, cpu_percent
 
-PIP = "psutil"
+if Packages('aiocron psutil'):
+    import aiocron
+    from psutil import virtual_memory, cpu_percent
 
-@OnScheduler(cron="* * * * *", help="甲骨文保活", doc='占用 10% 的 cpu 和内存')
+GlobalSN.reg(locals(), 'cron', None, '甲骨文保活', '消耗 10% 的内存和 CPU 资源')
+@aiocron.crontab('* * * * *', start=True)
 async def handler():
     async def occupy():
         # https://stackoverflow.com/a/24016138

@@ -1,20 +1,32 @@
-from client.utils import OnCmd
-from pyrogram import enums
+from pyrogram import Client, enums
+from config import command, GlobalSN, Packages
+
+import re
+import random
+import asyncio
 from pyrogram.types import InputMediaPhoto
-import random, asyncio, re, requests
 
-PIP = "requests"
+if Packages('requests'):
+    import requests
 
-@OnCmd("lsp", help="来点色图", doc="参数：\npics：套图\nvid：视频\nmjx：买家秀\n最后添加 s 将启用防剧透功能")
-async def handler(client, msg, chat_id, args, reply):
-    await msg.delete()
-    has_spoiler = True if len(args) > 0 and args[-1] == 's' else False
+doc = "参数：\n`pics`：套图\n`vid`：视频\n`mjx`：买家秀\n末尾添加 `s` 将启用防剧透功能"
+
+@Client.on_message(command('lsp'), group=GlobalSN.reg(locals(), 'cmd', 'lsp', '来点色图', doc))
+async def handler(client, message):
+    await message.delete()
+    args = message.text.strip().split()
+    arg = args[1] if len(args) > 1 else None
+
+    chat_id = message.chat.id
+    reply = message.reply_to_message_id if message.reply_to_message_id else None
+
+    has_spoiler = True if len(args) > 1 and args[-1] == 's' else False
     if has_spoiler == True:
         caption_has_spoiler = '||'
     else:
         caption_has_spoiler = ''
 
-    types = args[0] if len(args) > 0 else random.choice(['pics', 'vid', 'mjx'])
+    types = args[1] if len(args) > 1 and args[1] in ['pics', 'vid', 'mjx'] else random.choice(['pics', 'vid', 'mjx'])
 
     if types == 'pics':
         url = None

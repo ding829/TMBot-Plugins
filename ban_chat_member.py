@@ -1,10 +1,15 @@
-from client.utils import OnDraft
+from pyrogram import Client, enums
+from config import command, GlobalSN
+
 from pyrogram import enums
 
-@OnDraft("ban", help="滥权")
-async def handler(client, update, chat_id, args, reply):
+@Client.on_message(command('ban'), group=GlobalSN.reg(locals(), 'cmd', 'ban', '滥权'))
+async def handler(client, message):
+    await message.delete()
+    reply = message.reply_to_message_id if message.reply_to_message_id else None
+    chat_id = message.chat.id
     if reply:
-        msg = await client.get_messages(chat_id, update.draft.reply_to_msg_id)
+        msg = await client.get_messages(chat_id, reply)
         chats = await client.get_common_chats(msg.from_user.id)
         for chat in chats:
             status = (await client.get_chat_member(chat.id, "me")).status
