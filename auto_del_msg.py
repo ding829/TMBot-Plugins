@@ -47,16 +47,17 @@ doc = f"""默认每 30 分钟进行检查一次 1 天以上在机器人、群组
 """
 
 GlobalSN.reg(locals(), 'cron', None, '自动删除消息', doc)
+
 @aiocron.crontab(cron, start=True)
 async def handler():
     async def delmsg(chat_id):
         async for message in app.search_messages(chat_id, from_user="me"):
-            if (datetime.now() - message.date).days > intervals:
+            if (datetime.now() - message.date).days >= intervals:
                 if not message.service:
                     try:
                         if message.text or message.caption:
                             await message.edit_text('ㅤ')
-                    except:
+                    except Exception:
                         pass
                     await message.delete()
             await asyncio.sleep(3)
