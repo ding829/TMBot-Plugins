@@ -3,7 +3,7 @@ from config import command, GlobalSN
 
 import datetime
 
-@Client.on_message(command('info'), group=GlobalSN.reg(locals(), 'cmd', 'info', '获取群、对话或群员信息'))
+@Client.on_message(command('info'), group=GlobalSN.reg(locals(), 'cmd', 'info', '获取群、对话或群员信息', None, '0.1'))
 async def handler(client, message):
     await message.edit("获取中...")
     

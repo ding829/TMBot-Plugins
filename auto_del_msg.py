@@ -46,7 +46,7 @@ doc = f"""默认每 30 分钟进行检查一次 1 天以上在机器人、群组
 `types`：对话框类型，机器人为 `BOT`、群组为 `GROUP`、超级群组为 `SUPERGROUP`、频道为 `CHANNEL`、私聊为 `PRIVATE`、频道评论区为 `Discussion`
 """
 
-GlobalSN.reg(locals(), 'cron', None, '自动删除消息', doc)
+GlobalSN.reg(locals(), 'cron', None, '自动删除消息', doc, '0.1')
 
 @aiocron.crontab(cron, start=True)
 async def handler():

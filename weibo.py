@@ -6,7 +6,7 @@ from urllib import parse
 if Packages('requests'):
     import requests
 
-@Client.on_message(command('weibo'), group=GlobalSN.reg(locals(), 'cmd', 'weibo', '获取微博热搜'))
+@Client.on_message(command('weibo'), group=GlobalSN.reg(locals(), 'cmd', 'weibo', '获取微博热搜', None, '0.1'))
 async def handler(client, message):
     args = message.text.strip().split()
     arg = args[1] if len(args) > 1 else None

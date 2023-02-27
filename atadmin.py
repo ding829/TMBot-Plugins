@@ -3,7 +3,7 @@ from config import command, GlobalSN
 
 import asyncio
 
-@Client.on_message(command('admin'), group=GlobalSN.reg(locals(), 'cmd', 'admin', '召唤管理员'))
+@Client.on_message(command('admin'), group=GlobalSN.reg(locals(), 'cmd', 'admin', '召唤管理员', None, '0.1'))
 async def handler(client, message):
     await message.delete()
     reply = message.reply_to_message_id if message.reply_to_message_id else None

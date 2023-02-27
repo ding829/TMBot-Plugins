@@ -20,7 +20,7 @@ doc = f"""
 此插件源自[aliyunpan-sign](https://www.bboy.app/2023/02/20/%E5%86%99%E4%BA%86%E4%B8%80%E4%B8%AA%E9%98%BF%E9%87%8C%E4%BA%91%E7%9B%98%E8%87%AA%E5%8A%A8%E7%AD%BE%E5%88%B0%E8%84%9A%E6%9C%AC/)
 """
 
-@Client.on_message(command('alips'), group=GlobalSN.reg(locals(), 'cmd', 'alips', '阿里云盘签到', doc))
+@Client.on_message(command('alips'), group=GlobalSN.reg(locals(), 'cmd', 'alips', '阿里云盘签到', doc, '0.1'))
 async def handler(client, message):
     args = message.text.strip().split()
 

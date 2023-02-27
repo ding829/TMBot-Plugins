@@ -16,7 +16,7 @@ doc = f"""1、默认删除十条消息：`{prefixes}dme`
 3、删除所有群的消息：`{prefixes}dme all`
 """
 
-@Client.on_message(command('dme'), group=GlobalSN.reg(locals(), 'cmd', 'dme', '删除自己的消息', doc))
+@Client.on_message(command('dme'), group=GlobalSN.reg(locals(), 'cmd', 'dme', '删除自己的消息', doc, '0.1'))
 async def handler(client, message):
     await message.delete()
 

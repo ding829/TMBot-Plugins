@@ -30,7 +30,7 @@ doc = f"""使用示例：
 3、指定服务器测速：`{prefixes}speedtest <服务器 id>`
 """
 
-@Client.on_message(command('speedtest'), group=GlobalSN.reg(locals(), 'cmd', 'speedtest', '测速', doc))
+@Client.on_message(command('speedtest'), group=GlobalSN.reg(locals(), 'cmd', 'speedtest', '测速', doc, '0.1'))
 async def handler(client, message):
     await message.edit(f'运行中...')
     chat_id = message.chat.id

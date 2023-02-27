@@ -3,7 +3,7 @@ from config import command, GlobalSN
 
 doc="默认为复读机，添加 save 为转发到 Saved Messages"
 
-@Client.on_message(command('re'), group=GlobalSN.reg(locals(), 'cmd', 're', '复读机', doc))
+@Client.on_message(command('re'), group=GlobalSN.reg(locals(), 'cmd', 're', '复读机', doc, '0.1'))
 async def handler(client, message):
     await message.delete()
     args = message.text.strip().split()

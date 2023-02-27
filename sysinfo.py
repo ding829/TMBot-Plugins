@@ -9,7 +9,7 @@ if Packages('psutil py-cpuinfo uptime'):
     import cpuinfo
     from uptime import uptime
 
-@Client.on_message(command('sysinfo'), group=GlobalSN.reg(locals(), 'cmd', 'sysinfo', '获取系统信息'))
+@Client.on_message(command('sysinfo'), group=GlobalSN.reg(locals(), 'cmd', 'sysinfo', '获取系统信息', None, '0.1'))
 async def handler(client, message):
     await message.edit("获取中...")
 

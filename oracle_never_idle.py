@@ -9,7 +9,7 @@ if Packages('aiocron psutil'):
     import aiocron
     from psutil import virtual_memory, cpu_percent
 
-GlobalSN.reg(locals(), 'cron', None, '甲骨文保活', '消耗 10% 的内存和 CPU 资源')
+GlobalSN.reg(locals(), 'cron', None, '甲骨文保活', '消耗 10% 的内存和 CPU 资源', '0.1')
 @aiocron.crontab('* * * * *', start=True)
 async def handler():
     async def occupy():

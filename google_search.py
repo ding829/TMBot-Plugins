@@ -6,7 +6,7 @@ from urllib import parse
 if Packages('googlesearch-python'):
     from googlesearch import search
 
-@Client.on_message(command('google'), group=GlobalSN.reg(locals(), 'cmd', 'google', '谷歌搜索'))
+@Client.on_message(command('google'), group=GlobalSN.reg(locals(), 'cmd', 'google', '谷歌搜索', None, '0.1'))
 async def handler(client, message):
     title = None
     result = {}

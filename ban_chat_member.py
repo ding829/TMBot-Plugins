@@ -3,7 +3,7 @@ from config import command, GlobalSN
 
 from pyrogram import enums
 
-@Client.on_message(command('ban'), group=GlobalSN.reg(locals(), 'cmd', 'ban', '滥权'))
+@Client.on_message(command('ban'), group=GlobalSN.reg(locals(), 'cmd', 'ban', '滥权', None, '0.1'))
 async def handler(client, message):
     await message.delete()
     reply = message.reply_to_message_id if message.reply_to_message_id else None

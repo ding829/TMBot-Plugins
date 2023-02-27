@@ -3,7 +3,7 @@ from config import command, GlobalSN
 
 import aiohttp
 
-@Client.on_message(command('diss'), group=GlobalSN.reg(locals(), 'cmd', 'diss', '怼人'))
+@Client.on_message(command('diss'), group=GlobalSN.reg(locals(), 'cmd', 'diss', '怼人', None, '0.1'))
 async def handler(client, message):
     await message.delete()
     reply = message.reply_to_message_id if message.reply_to_message_id else None

@@ -11,7 +11,7 @@ if Packages('requests'):
 
 doc = "参数：\n`pics`：套图\n`vid`：视频\n`mjx`：买家秀\n末尾添加 `s` 将启用防剧透功能"
 
-@Client.on_message(command('lsp'), group=GlobalSN.reg(locals(), 'cmd', 'lsp', '来点色图', doc))
+@Client.on_message(command('lsp'), group=GlobalSN.reg(locals(), 'cmd', 'lsp', '来点色图', doc, '0.1'))
 async def handler(client, message):
     await message.delete()
     args = message.text.strip().split()

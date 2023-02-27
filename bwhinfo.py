@@ -12,7 +12,7 @@ if not os.path.exists(config):
         conf = {"VEID": "", "API_KEY": ""}
         json.dump(conf, f, indent=4, ensure_ascii=False)
 
-@Client.on_message(command('bwh'), group=GlobalSN.reg(locals(), 'cmd', 'bwh', '获取搬瓦工 vps 信息', f'在搬瓦工后台获取 api 填入配置文件 `{config}` 中'))
+@Client.on_message(command('bwh'), group=GlobalSN.reg(locals(), 'cmd', 'bwh', '获取搬瓦工 vps 信息', f'在搬瓦工后台获取 api 填入配置文件 `{config}` 中', '0.1'))
 async def handler(client, message):
     await message.edit("获取中...")
     content = str()

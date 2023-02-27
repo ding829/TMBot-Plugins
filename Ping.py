@@ -9,7 +9,7 @@ if Packages('ping3'):
 
 doc = f"1、`{prefixes}ping`\n2、`{prefixes}ping dc`"
 
-@Client.on_message(command('ping'), group=GlobalSN.reg(locals(), 'cmd', 'ping', 'ping', doc))
+@Client.on_message(command('ping'), group=GlobalSN.reg(locals(), 'cmd', 'ping', 'ping', doc, '0.1'))
 async def handler(client, message):
     args = message.text.strip().split()
     arg = args[1] if len(args) > 1 else None
