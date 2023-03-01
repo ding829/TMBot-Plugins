@@ -14,21 +14,14 @@ async def handler(client, message):
     args = message.text.strip().split()
     arg = args[1] if len(args) > 1 else None
     if arg == 'dc':
-        await message.edit("ping...")
-        DCs = {
-            1: "149.154.175.53",
-            2: "149.154.167.51",
-            3: "149.154.175.100",
-            4: "149.154.167.91",
-            5: "91.108.56.130"
-        }
-
+        await message.edit("Pong...")
+        DCs = ["149.154.175.53", "149.154.167.51", "149.154.175.100", "149.154.167.91", "91.108.56.130"]
         data = []
         for dc in DCs:
-            try:
-                data.append(round(ping(DCs[dc], unit = "ms"), 2))
-            except Exception:
-                pass
+            result = ping(dc, unit = "ms")
+            if result is not None:
+                result = round(result, 2)
+            data.append(result)
 
         if not any(data):
             await message.edit("ping 失败~")
