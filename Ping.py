@@ -9,7 +9,7 @@ if Packages('ping3'):
 
 doc = f"1、`{prefixes}ping`\n2、`{prefixes}ping dc`"
 
-@Client.on_message(command('ping'), group=GlobalSN.reg(locals(), 'cmd', 'ping', 'ping', doc, '0.1'))
+@Client.on_message(command('ping'), group=GlobalSN.reg(locals(), 'cmd', 'ping', 'ping', doc, '0.2'))
 async def handler(client, message):
     args = message.text.strip().split()
     arg = args[1] if len(args) > 1 else None
@@ -24,9 +24,11 @@ async def handler(client, message):
         }
 
         data = []
-        for dc in range(1, 6):
-            result = round(ping(DCs[dc], unit = "ms"), 2)
-            data.append(result)
+        for dc in DCs:
+            try:
+                data.append(round(ping(DCs[dc], unit = "ms"), 2))
+            except Exception:
+                pass
 
         if not any(data):
             await message.edit("ping 失败~")
