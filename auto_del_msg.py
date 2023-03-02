@@ -46,13 +46,15 @@ doc = f"""默认每 30 分钟进行检查一次 1 天以上在机器人、群组
 `types`：对话框类型，机器人为 `BOT`、群组为 `GROUP`、超级群组为 `SUPERGROUP`、频道为 `CHANNEL`、私聊为 `PRIVATE`、频道评论区为 `Discussion`
 """
 
-GlobalSN.reg(locals(), 'cron', None, '自动删除消息', doc, '0.1')
+GlobalSN.reg(locals(), 'cron', None, '自动删除消息', doc, '0.2')
 
 @aiocron.crontab(cron, start=True)
 async def handler():
     count = 100
     async def delmsg(chat_id):
         async for message in app.search_messages(chat_id, from_user="me"):
+            global count
+            count -= 1
             if (datetime.now() - message.date).days >= intervals:
                 if not message.service:
                     try:
@@ -65,15 +67,13 @@ async def handler():
 
     async for dialog in app.get_dialogs():
         if 'Discussion' in ChatType:
-            m -= 1
             if dialog.chat.type == enums.ChatType.CHANNEL:
                 chat = await app.get_chat(dialog.chat.id)
                 if chat.linked_chat:
                     await delmsg(chat.linked_chat.id)
 
         if dialog.chat.type in ChatType:
-            m -= 1
             await delmsg(dialog.chat.id)
 
-        if m == 0:
+        if count == 0:
             break
