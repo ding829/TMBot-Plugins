@@ -50,6 +50,7 @@ GlobalSN.reg(locals(), 'cron', None, '自动删除消息', doc, '0.2')
 
 @aiocron.crontab(cron, start=True)
 async def handler():
+    global count
     count = 100
     async def delmsg(chat_id):
         global count
