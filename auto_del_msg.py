@@ -50,6 +50,7 @@ GlobalSN.reg(locals(), 'cron', None, '自动删除消息', doc, '0.1')
 
 @aiocron.crontab(cron, start=True)
 async def handler():
+    count = 100
     async def delmsg(chat_id):
         async for message in app.search_messages(chat_id, from_user="me"):
             if (datetime.now() - message.date).days >= intervals:
@@ -64,11 +65,15 @@ async def handler():
 
     async for dialog in app.get_dialogs():
         if 'Discussion' in ChatType:
+            m -= 1
             if dialog.chat.type == enums.ChatType.CHANNEL:
                 chat = await app.get_chat(dialog.chat.id)
                 if chat.linked_chat:
                     await delmsg(chat.linked_chat.id)
 
         if dialog.chat.type in ChatType:
+            m -= 1
             await delmsg(dialog.chat.id)
-        await asyncio.sleep(3)
+
+        if m == 0:
+            break
