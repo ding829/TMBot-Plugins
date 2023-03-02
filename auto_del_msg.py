@@ -52,9 +52,9 @@ GlobalSN.reg(locals(), 'cron', None, '自动删除消息', doc, '0.2')
 async def handler():
     count = 100
     async def delmsg(chat_id):
+        global count
+        count -= 1
         async for message in app.search_messages(chat_id, from_user="me"):
-            global count
-            count -= 1
             if (datetime.now() - message.date).days >= intervals:
                 if not message.service:
                     try:
