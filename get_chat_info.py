@@ -1,9 +1,9 @@
-from pyrogram import Client, enums
-from config import command, GlobalSN
-
+'''获取群、对话或群员信息'''
+from utils.utils import oncmd
+from pyrogram import enums
 import datetime
 
-@Client.on_message(command('info'), group=GlobalSN.reg(locals(), 'cmd', 'info', '获取群、对话或群员信息', None, '0.1'))
+@oncmd(cmd='info', ver='0.1')
 async def handler(client, message):
     await message.edit("获取中...")
     
