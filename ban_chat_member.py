@@ -3,7 +3,7 @@ from utils.utils import oncmd
 
 from pyrogram import enums
 
-@oncmd(cmd='ping', ver='0.1')
+@oncmd(cmd='ban', ver='0.1')
 async def handler(client, message):
     await message.delete()
     reply = message.reply_to_message_id if message.reply_to_message_id else None
