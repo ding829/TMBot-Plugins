@@ -45,7 +45,6 @@ async def handler(client):
 
 为避免触发 telegram 限制，每次最多只删除一百条信息。
     """
-    print(1)
     global count
     count = 100
     async def delmsg(chat_id):
