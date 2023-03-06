@@ -9,10 +9,10 @@ async def handler(client, message):
 
     with requests.Session() as s:
         r = s.get('https://zuan.shabi.workers.dev')
-        if r.ok:
-            content = f'**{r.text}**'
-            if reply:
-                content += f' [😘](tg://user?id={message.reply_to_message.from_user.id})'
-            await client.send_message(message.chat.id, content, reply_to_message_id=reply)
- 
-                
+
+    if r.ok:
+        content = f'**{r.text}**'
+        if reply:
+            content += f' [😘](tg://user?id={message.reply_to_message.from_user.id})'
+
+        await client.send_message(message.chat.id, content, reply_to_message_id=reply)

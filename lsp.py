@@ -76,7 +76,8 @@ async def handler(client, message):
             await client.send_video(chat_id, m.video.file_id, has_spoiler=True)
 
     elif types == 'mjx':
-        r = requests.get("https://mjx.0o0o0o0.workers.dev/", stream=True)
+        with requests.Session() as s:
+            r = s.get("https://mjx.0o0o0o0.workers.dev/")
         if r.ok:
             url = r.json()['url']
             caption = r.json()['des']

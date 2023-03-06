@@ -53,10 +53,11 @@ async def handler(client, message):
         arch = platform.machine()
         url = f'https://install.speedtest.net/app/cli/ookla-speedtest-1.2.0-linux-{arch}.tgz'
         try:
-            req = requests.get(url)
-            if req.ok:
+            with requests.Session() as s:
+                r = s.get(url)
+            if r.ok:
                 with open(f'{speedtest}.tgz', "wb") as f:
-                    f.write(req.content)
+                    f.write(r.content)
                 tar = tarfile.open(f'{speedtest}.tgz', "r:*")
                 tar.extract("speedtest", path=tmp_dir)
         except:
