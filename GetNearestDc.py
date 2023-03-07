@@ -1,4 +1,4 @@
-'''获取自己所属 dc'''
+'''获取 dc 方位'''
 from utils.utils import oncmd
 
 from pyrogram.raw.functions.help import GetNearestDc
