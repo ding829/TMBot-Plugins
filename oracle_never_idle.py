@@ -1,4 +1,4 @@
-'''谷歌搜索'''
+'''甲骨文保活'''
 from utils.utils import Packages, onsched
 
 import time
@@ -11,6 +11,7 @@ if Packages('psutil'):
 
 @onsched('* * * * *', ver='0.1')
 async def handler(client):
+    '''消耗 10% 的 cpu 和内存资源'''
     cpu = cpu_percent(3) < 10
     m = virtual_memory().total * 0.10
     mem = virtual_memory().used < m
